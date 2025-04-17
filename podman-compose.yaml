@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  dev:
+    build: .
+    container_name: dev-env-poop
+    volumes:
+      - .workspace:/root/workspace
+      - ${XDG_RUNTIME_DIR}/podman/podman.sock:/run/podman/podman.sock
+      - ${HOME}/.aws:/root/.aws:ro
+      - ${HOME}/.kube:/root/.kube:ro
+      - ${HOME}/.ssh:/root/.ssh:ro
+    environment:
+      - CONTAINER_HOST=unix:///run/podman/podman.sock
+    tty: true
+    stdin_open: true
